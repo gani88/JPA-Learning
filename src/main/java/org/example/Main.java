@@ -30,6 +30,11 @@ public class Main {
 //        newProduct1.setName("Sabun");
 //        newProduct1.setPrice(5000L);
 
+        Book newBook1 = new Book();
+        newBook1.setBookName("Intro to Algebra");
+        newBook1.setAuthor("Erick K.");
+        em.persist(newBook1);
+
 //        For 1-to-1 Relationship
 //        Address newAddress1 = new Address();
 //        newAddress1.setStreet("Jl. Dewantoro");
@@ -41,37 +46,37 @@ public class Main {
 
 
 //        For Many-to-Many Relationship
-        Student newStudent1 = new Student();
-        newStudent1.setName("Angelo");
-        Student newStudent2 = new Student();
-        newStudent2.setName("Ruffalo");
-
-        Course newCourse1 = new Course();
-        newCourse1.setName("Algebra");
-        Course newCourse2 = new Course();
-        newCourse2.setName("Physic");
-
-
-        // Create the relationships
-        List<Student> studentList = new ArrayList<>();
-        studentList.add(newStudent1);
-        studentList.add(newStudent2);
-
-        List<Course> courseList = new ArrayList<>();
-        courseList.add(newCourse1);
-        courseList.add(newCourse2);
-
-        // Assign
-        newCourse1.setStudents(studentList);
-        newCourse2.setStudents(studentList);
-
-        newStudent1.setCourses(courseList);
-        newStudent2.setCourses(courseList);
-
-        em.persist(newCourse1);
-        em.persist(newCourse2);
-        em.persist(newStudent1);
-        em.persist(newStudent2);
+//        Student newStudent1 = new Student();
+//        newStudent1.setName("Lyle");
+//        Student newStudent2 = new Student();
+//        newStudent2.setName("Anwar");
+//
+//        Course newCourse1 = new Course();
+//        newCourse1.setName("Linguist");
+//        Course newCourse2 = new Course();
+//        newCourse2.setName("Economy");
+//
+//
+//        // Create the relationships
+//        List<Student> studentList = new ArrayList<>();
+//        studentList.add(newStudent1);
+//        studentList.add(newStudent2);
+//
+//        List<Course> courseList = new ArrayList<>();
+//        courseList.add(newCourse1);
+//        courseList.add(newCourse2);
+//
+//        // Assign
+//        newCourse1.setStudents(studentList);
+//        newCourse2.setStudents(studentList);
+//
+//        newStudent1.setCourses(courseList);
+//        newStudent2.setCourses(courseList);
+//
+//        em.persist(newCourse1);
+//        em.persist(newCourse2);
+//        em.persist(newStudent1);
+//        em.persist(newStudent2);
         transaction.commit();
 
         // Close Transaction / EntityManager and EntityManagerFactory
