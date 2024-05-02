@@ -19,7 +19,7 @@ public class Address {
     private String city;
 
     // This where the address become foreign key in user
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address") // bisa pake @OneToOne atau tidak, jika tidak ditambahkan maka akan jadi unidirectional.. kita mengelola hanya di user saja.
     private User user;
 
 
