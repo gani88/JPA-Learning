@@ -12,8 +12,14 @@
             <property name="jakarta.persistence.jdbc.password" value="postgres"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+
 <!--            harus hati hati memakai auto migrate karena akan berimpact pada database, create only create;update will update;create-drop
                 create and droping after using app-->
+
         </properties>
+
     </persistence-unit>
+    
 </persistence>

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products") // anotasi ini harus ada kalo mau ada di tablenya
+@NamedQuery(name = "Product.findByUserId", query = "SELECT p FROM Product p WHERE p.id = :id")
 public class Product {
 
     @Id
@@ -40,5 +41,14 @@ public class Product {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

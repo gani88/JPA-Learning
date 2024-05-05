@@ -14,7 +14,7 @@ public class Employee {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id") // kalo di department nama columnnya udah sama juga department_id, maka gak perlu pake reference
     private Department department;
 
@@ -36,6 +36,10 @@ public class Employee {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

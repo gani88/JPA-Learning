@@ -1,19 +1,18 @@
 package org.example;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import org.example.entity.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-/**
+/*
  *  To create an EntityManager, an EntityManagerFactory is needed.
  *  EntityManagerFactory is an interface for interacting with EntityManager.
  *  This is the first step in using JPA in a Java application.
@@ -53,6 +52,31 @@ public class Main {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
+
+        // NATIVE QUERY
+//        Product newProduct = new Product();
+//        newProduct.setId(10L);
+//        newProduct.setName("Wafer");
+//        newProduct.setPrice(10000L);
+//
+//        em.createNativeQuery("INSERT INTO products(id, name, price) VALUES (?, ?, ?)")
+//                .setParameter(1, newProduct.getId())
+//                .setParameter(2, newProduct.getName())
+//                .setParameter(3, newProduct.getPrice())
+//                .executeUpdate();
+
+        // TypedQuery
+        TypedQuery<Product> jpqlQuery = em.createQuery("SELECT p FROM Product p WHERE p.id = :id", Product.class);
+        jpqlQuery.setParameter("id", 3);
+
+        Product hasilQuery =  jpqlQuery.getSingleResult();
+        System.out.println(hasilQuery.toString());
+
+        // NamedQuery
+        Query namedQuery = em.createNamedQuery("Product.findByUserId");
+        namedQuery.setParameter("id", 2);
+        Object singleResult = namedQuery.getSingleResult();
+        System.out.println(singleResult.toString());
         // ========= Persist/Insert =========
         // For Product (SINGLE ENTITY)
 //        Product newProduct1 = new Product();
@@ -109,31 +133,61 @@ public class Main {
 
 
         // For One-to-Many Relationship
-        Department newDepartment1 = new Department();
-        newDepartment1.setName("Finance");
-        em.persist(newDepartment1);
+//        Department newDepartment1 = new Department();
+//        newDepartment1.setName("Finance");
+//        em.persist(newDepartment1);
 
-        Employee newEmployee1 = new Employee();
-        newEmployee1.setName("Beta");
-        newEmployee1.setDepartment(newDepartment1);
+//        ====== Trying to not persist the department and only persist employee (need cascade) =====
+//        Department newDepartment2 = new Department();
+//        newDepartment2.setName("Research");
+//        em.persist(newDepartment2);
+//
+//        Employee newEmployee3 = new Employee();
+//        newEmployee3.setName("Jhiro");
+//        newEmployee3.setDepartment(newDepartment2);
+//
+//        Employee newEmployee4 = new Employee();
+//        newEmployee4.setName("Opel");
+//        newEmployee4.setDepartment(newDepartment2);
+//        em.persist(newEmployee3);
+//        em.persist(newEmployee4);
+//        ====== Trying to not persist the department and only persist employee =====
 
 
-        Employee newEmployee2 = new Employee();
-        newEmployee2.setName("Ana");
-        newEmployee2.setDepartment(newDepartment1);
+//        Employee newEmployee1 = new Employee();
+//        newEmployee1.setName("Beta");
+//        newEmployee1.setDepartment(newDepartment1);
+//
 
-        em.persist(newEmployee1);
-        em.persist(newEmployee2);
+        // ========= INSERT =========
+//        Department financeDepartment = em.find(Department.class, 1);
+//        Employee newEmployeeNext = new Employee();
+//        newEmployeeNext.setName("Rifqi GG");
+//        newEmployeeNext.setDepartment(financeDepartment);
+        // ========= INSERT =========
+
+//        em.persist(newEmployee1);
+//        em.persist(newEmployeeNext);
+
         // ========= DELETE =========
 //        Student student = em.find(Student.class, 403);
 //        em.remove(student);
 
+//        Employee employee = em.find(Employee.class, 3);
+//        em.remove(employee);
+
+//        Product product = em.find(Product.class, 6);
+//        em.remove(product);
+
         // ========= Find/Retrieve =========
 //        Student student = em.find(Student.class, 252);
+//        List<Course> courses = student.getCourses();
 //        System.out.println("Student id      :" + student.getId());
 //        System.out.println("Student name    :" + student.getName());
-//        System.out.println("Student course  :" + student.getCourses());
-
+//        System.out.println("Student course  : ");
+//        for (Course courses1 : courses) {
+//            System.out.print(courses1.getName() + ", ");
+//        }
 
         transaction.commit();
 
